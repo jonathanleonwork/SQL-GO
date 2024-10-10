@@ -7,12 +7,17 @@ import (
 	"os"
 
 	"github.com/go-sql-driver/mysql"
+	"github.com/joho/godotenv"
 )
 
 var db *sql.DB
 
 func main() {
 	// Capture connection properties.
+	enverr := godotenv.Load(".env")
+	if enverr != nil {
+		log.Fatal("Error loading .env file")
+	}
 
 	cfg := mysql.Config{
 		User:   os.Getenv("DBUSER"),
